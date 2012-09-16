@@ -9,12 +9,26 @@ my $config_content = join "", <F>;
 close F;
 
 my $rh_config = {};
-while ($config_content =~ m{(.*)=(.*)}g){
-    my $k = $1;
-    if ($k =~ m{^#}){
-        next;
+read_config();
+sub read_config {
+    while ($config_content =~ m{(.*)=(.*)}g){
+        my $k = $1;
+        my $v  = $2;
+        if ($k =~ m{^#}){
+            next;
+        }
+        if ($rh_config->{DIR} && $rh_config->{PROJECT}){
+            my $dir = $rh_config->{DIR};
+            my $project = $rh_config->{PROJECT};
+            $v =~ s{\$DIR}{$dir}g;
+            $v =~ s{\$PROJECT}{$project}g;
+        }
+        $rh_config->{$1} = $v;
     }
-    $rh_config->{$1} = $2;
+
+    if ($rh_config->{'listen'}){
+        $rh_config->{target} =  $rh_config->{target} .' -listen ' . $rh_config->{'listen'};
+    }
 }
 
 
@@ -22,8 +36,11 @@ while ($config_content =~ m{(.*)=(.*)}g){
 #extract from zip
 my $tmp_dir = $rh_config->{ane_path} . "/tmp_ane" . time();
 my $iphone_arm_dir = $tmp_dir . '/iPhone-ARM';
+my $default_dir = $tmp_dir . '/default';
+
 mk_dir($tmp_dir);
 mk_dir($iphone_arm_dir);
+mk_dir($default_dir);
 
 copy_file($rh_config->{ane_path} . "/" . $rh_config->{ane_swc}, $tmp_dir);
 
@@ -44,11 +61,14 @@ for my $name(@memberNames) {
 #copy xxx.a -> iphone_arm_dir/
 copy_file($rh_config->{ane_path} . "/" .$rh_config->{native_lib}, $iphone_arm_dir.'/');
 
+#copy iphone_arm_dir/library.swf -> /default
+copy_file($iphone_arm_dir . "/library.swf", $default_dir.'/');
+
 
 #write extension.xml
 my $ane_id = $rh_config->{ane_id};
 my $native_lib = $rh_config->{native_lib};
-my $extension_xml = qq#<extension xmlns="http://ns.adobe.com/air/extension/3.3">
+my $extension_xml = qq#<extension xmlns="http://ns.adobe.com/air/extension/2.5">
         <id>$ane_id</id>
         <versionNumber>1</versionNumber>
         <platforms>
@@ -59,6 +79,9 @@ my $extension_xml = qq#<extension xmlns="http://ns.adobe.com/air/extension/3.3">
                                 <finalizer>ExtFinalizer</finalizer>
                         </applicationDeployment>
                 </platform>
+                 <platform name="default"> 
+                    <applicationDeployment/> 
+                </platform> 
         </platforms>
 </extension>
 #;
@@ -68,7 +91,7 @@ save_file($tmp_dir.'/extension.xml', $extension_xml);
 my $ane_file_name = $rh_config->{ane};
 #$ane_file_name =~ s{\.a}{.ane};
 
-my $cmd =  $rh_config->{adt} . " -package " . ' -storetype pkcs12 ' . ' -keystore ' . $rh_config->{ane_p12} . ' -storepass ' . $rh_config->{ane_password} . ' -target ane ' . $ane_file_name . '  extension.xml -swc ' . $rh_config->{ane_swc} . ' -platform iPhone-ARM -C iPhone-ARM . ';
+my $cmd =  $rh_config->{adt} . " -package " . ' -storetype pkcs12 ' . ' -keystore ' . $rh_config->{ane_p12} . ' -storepass ' . $rh_config->{ane_password} . ' -target ane ' . $ane_file_name . '  extension.xml -swc ' . $rh_config->{ane_swc} . ' -platform iPhone-ARM -C iPhone-ARM . -platform default -C default .';
 
 print $cmd . "\n";
 
