@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+<Children>
+	<Child id="1" name="mc" />
+	<Child id="2" name="mc2" />
+</Children>
+<Frames>
+	<Frame index="0">
+		<Matrix id="1" a="1" b="0" c="0" d="1" tx="0" ty="0" alpha="1"  />
+	</Frame>
+	<Frame index="1">
+		<Matrix id="1" a="1" b="0" c="0" d="1" tx="-40.1" ty="0" alpha="1"  />
+	</Frame>
+	<Frame index="2">
+		<Matrix id="1" a="1" b="0" c="0" d="1" tx="-50.1" ty="0" alpha="1"  />
+	</Frame>
+	<Frame index="3">
+		<Matrix id="1" a="1" b="0" c="0" d="1" tx="-28.6" ty="0" alpha="1"  />
+	</Frame>
+	<Frame index="4">
+		<Matrix id="1" a="1" b="0" c="0" d="1" tx="-7.1" ty="0" alpha="1"  />
+	</Frame>
+	<Frame index="5">
+		<Matrix id="1" a="1" b="0" c="0" d="1" tx="-21.25" ty="0" alpha="1"  />
+	</Frame>
+	<Frame index="6">
+		<Matrix id="1" a="1" b="0" c="0" d="1" tx="-35.45" ty="0" alpha="1"  />
+		<Matrix id="2" a="1" b="0" c="0" d="1" tx="-220.95" ty="-142" alpha="1"  />
+	</Frame>
+	<Frame index="7">
+		<Matrix id="1" a="1" b="0" c="0" d="1" tx="-24.8" ty="0" alpha="1"  />
+		<Matrix id="2" a="1" b="0" c="0" d="1" tx="-199.05" ty="-138.2" alpha="0.93359375"  />
+	</Frame>
+	<Frame index="8">
+		<Matrix id="1" a="1" b="0" c="0" d="1" tx="-14.2" ty="0" alpha="1"  />
+		<Matrix id="2" a="1" b="0" c="0" d="1" tx="-177.2" ty="-134.4" alpha="0.8671875"  />
+	</Frame>
+	<Frame index="9">
+		<Matrix id="1" a="1" b="0" c="0" d="1" tx="-20.1" ty="0" alpha="1"  />
+		<Matrix id="2" a="1" b="0" c="0" d="1" tx="-155.3" ty="-130.6" alpha="0.8046875"  />
+	</Frame>
+	<Frame index="10">
+		<Matrix id="1" a="1" b="0" c="0" d="1" tx="0" ty="0" alpha="1"  />
+		<Matrix id="2" a="1" b="0" c="0" d="1" tx="-133.45" ty="-126.75" alpha="0.73828125"  />
+	</Frame>
+	<Frame index="11">
+		<Matrix id="1" a="1" b="0" c="0" d="1" tx="6.55" ty="-9.8" alpha="0.90625"  />
+		<Matrix id="2" a="1" b="0" c="0" d="1" tx="-111.55" ty="-122.95" alpha="0.671875"  />
+	</Frame>
+	<Frame index="12">
+		<Matrix id="1" a="1" b="0" c="0" d="1" tx="13.1" ty="-19.55" alpha="0.8125"  />
+		<Matrix id="2" a="1" b="0" c="0" d="1" tx="-89.65" ty="-119.15" alpha="0.60546875"  />
+	</Frame>
+	<Frame index="13">
+		<Matrix id="1" a="1" b="0" c="0" d="1" tx="19.65" ty="-29.35" alpha="0.71484375"  />
+		<Matrix id="2" a="1" b="0" c="0" d="1" tx="-67.8" ty="-115.35" alpha="0.54296875"  />
+	</Frame>
+	<Frame index="14">
+		<Matrix id="1" a="1" b="0" c="0" d="1" tx="26.2" ty="-39.1" alpha="0.62109375"  />
+		<Matrix id="2" a="1" b="0" c="0" d="1" tx="-45.9" ty="-111.55" alpha="0.4765625"  />
+	</Frame>
+	<Frame index="15">
+		<Matrix id="1" a="1" b="0" c="0" d="1" tx="32.8" ty="-48.9" alpha="0.52734375"  />
+		<Matrix id="2" a="1" b="0" c="0" d="1" tx="-24" ty="-107.75" alpha="0.41015625"  />
+	</Frame>
+	<Frame index="16">
+		<Matrix id="1" a="1" b="0" c="0" d="1" tx="39.35" ty="-58.65" alpha="0.43359375"  />
+		<Matrix id="2" a="1" b="0" c="0" d="1" tx="-2.15" ty="-103.9" alpha="0.34375"  />
+	</Frame>
+	<Frame index="17">
+		<Matrix id="1" a="1" b="0" c="0" d="1" tx="45.9" ty="-68.45" alpha="0.3359375"  />
+		<Matrix id="2" a="1" b="0" c="0" d="1" tx="19.75" ty="-100.1" alpha="0.28125"  />
+	</Frame>
+	<Frame index="18">
+		<Matrix id="1" a="1" b="0" c="0" d="1" tx="52.45" ty="-78.2" alpha="0.2421875"  />
+		<Matrix id="2" a="1" b="0" c="0" d="1" tx="41.6" ty="-96.3" alpha="0.21484375"  />
+	</Frame>
+	<Frame index="19">
+		<Matrix id="1" a="1" b="0" c="0" d="1" tx="59" ty="-88" alpha="0.1484375"  />
+		<Matrix id="2" a="1" b="0" c="0" d="1" tx="63.5" ty="-92.5" alpha="0.1484375"  />
+	</Frame>
+</Frames>
+</data>
