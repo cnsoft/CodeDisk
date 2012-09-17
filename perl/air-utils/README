@@ -1,0 +1,19 @@
+
+
+
+1. ipa.pl
+
+Adt script of wrapping some adt options in adt.ini
+
+
+
+2. fdb.pl
+
+A script of quickly lauching fdb for air remoting debugging.
+
+
+3. ane.pl
+
+convert .a file(ios static library) + .swc (as3 lib) to .ane
+
+For futher detail, refer to http://www.swfdiy.com/?p=1241
