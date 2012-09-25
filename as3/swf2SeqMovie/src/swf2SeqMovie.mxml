@@ -235,7 +235,7 @@
 	<s:Group id="select" width="431" height="104">
 		<s:CheckBox id="ignoreBlank" x="15" y="16" label="忽略空帧" selected="true"/>
 		<s:TextInput id="txtCares" x="103" y="39" width="317" height="24" text=".*"/>
-		<s:Label x="104" y="19" text="正则过滤"/>
+		<s:Label x="104" y="19" width="264" text="正则过滤(不过滤请填写.*)"/>
 		<s:CheckBox x="11" y="45" label="剔除重复" id="noDuplicated" selected="true"/>
 		<s:CheckBox id="placeMovies" x="12" y="78" width="356" label="时间轴放置替换链接类"
 					selected="true"/>
