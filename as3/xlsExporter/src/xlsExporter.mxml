@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:WindowedApplication xmlns:fx="http://ns.adobe.com/mxml/2009"
+					   xmlns:s="library://ns.adobe.com/flex/spark"
+					   xmlns:mx="library://ns.adobe.com/flex/mx"
+					   width="316" height="145" title="xls导出XML工具"  creationComplete="onInit()">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<s:Button id="btn" x="53" y="35" width="201" height="69" label="选择要转换的xlsx(可以选择多个)"
+			  click="onSelectFiles()"/>
+	<fx:Script>
+		<![CDATA[
+			import mx.controls.Alert;
+			
+			import u3.io.file.FileOpenUtils;
+		
+			private var jobs:Vector.<XMLConvertJob>;
+			protected function onInit():void {
+			}
+			
+			protected function onSelectFiles():void {
+				var allFilter:FileFilter = new FileFilter("* (*.*)", "*.*");
+	
+				FileOpenUtils.openAndReadFiles(onSlectFiles, allFilter);
+			}
+			
+			
+			private function onSlectFiles(data:Array, files:Array):void {	
+				jobs = new Vector.<XMLConvertJob>;
+				
+				for (var i:int=0;i<data.length;i++){
+					var job:XMLConvertJob = new XMLConvertJob(data[i], files[i] );
+					jobs.push(job);
+					job.addEventListener(XLSEvent.NO_FIRST_DATA, onError);
+					job.addEventListener(XLSEvent.NO_SHEET, onError);
+					job.addEventListener(XLSEvent.NOT_HEADER, onError);
+					job.addEventListener(Event.COMPLETE, onComplete);
+
+					job.start();
+				}
+				
+				btn.enabled = jobs.length == 0 ?  true :false;
+
+			}
+			
+			
+			protected function onError(event:XLSEvent):void
+			{
+				var job:XMLConvertJob = XMLConvertJob(event.target);
+				var index:int = jobs.indexOf(job);
+				if (index != -1){
+					jobs.splice(index, 1);
+				}
+				Alert.show("error in " + job.fileName + ":" + event.type);
+			}
+			
+			protected function onComplete(event:Event):void
+			{
+				var job:XMLConvertJob = XMLConvertJob(event.target);
+				var index:int = jobs.indexOf(job);
+				if (index != -1){
+					jobs.splice(index, 1);
+				}
+				btn.enabled = jobs.length == 0 ?  true :false;
+				
+				if (btn.enabled){
+					Alert.show("全部完成,请查看桌面上的Client和Server文件夹");
+
+				}
+			}
+			
+		]]>
+	</fx:Script>
+</s:WindowedApplication>
