@@ -23,7 +23,7 @@ package
 	
 	import flashx.textLayout.events.DamageEvent;
 	
-	import model.DrawData;
+
 	import model.FrameData;
 	import model.MovieData;
 	

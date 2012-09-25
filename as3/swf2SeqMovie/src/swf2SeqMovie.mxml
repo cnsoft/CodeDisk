@@ -9,6 +9,8 @@
 			import com.adobe.crypto.MD5;
 			import com.adobe.serialization.json.JSONEncoder;
 			
+			import io.Utils;
+			
 			import model.MovieData;
 			
 			import mx.collections.ArrayCollection;
@@ -16,9 +18,7 @@
 			import mx.core.UIComponent;
 			import mx.graphics.codec.PNGEncoder;
 			
-			import u3.display.image.U3Image;
-			import u3.io.file.FileOpenUtils;
-			
+
 			
 			protected var jobs:Vector.<ParseJob> = new Vector.<ParseJob>;
 			protected var jobCount:int;
@@ -42,8 +42,7 @@
 				}
 				
 				var allFilter:FileFilter = new FileFilter("* (*.*)", "*.*");
-				
-				FileOpenUtils.openAndReadFiles(onSlectFiles, allFilter);
+				Utils.openAndReadFiles(onSlectFiles, allFilter);
 			}
 			
 			private function onSlectFiles(data:Array, files:Array):void {	
@@ -112,8 +111,10 @@
 				var bitmaps:Array = [];
 				//w_h_md5 as key
 				var count:int = 0;
+				var data:MovieData;
+
 				for (i=0;i<movieList.length;i++){
-					var data:MovieData = movieList[i];
+					data = movieList[i];
 					count += data.bitmaps.length;
 					for (var b:int=0;b<data.bitmaps.length;b++){
 						if (noDuplicated.selected){
@@ -159,10 +160,9 @@
 				 * 	'yyy': {....}	
 				 * }];
 				 */ 
-				
 				var moviesConfig:Object = {};
 				for (i=0;i<movieList.length;i++){
-					var data:MovieData = movieList[i];
+					data = movieList[i];
 					var config:Object = {frames:data.bitmapIndices, lables:data.frameLables,x:[],y:[] };
 					for (p=0;p<data.offsets.length;p++){
 						config['x'].push(data.offsets[p].x);

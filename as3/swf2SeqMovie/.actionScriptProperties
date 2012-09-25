@@ -10,7 +10,6 @@
         </excludedEntries>
       </libraryPathEntry>
       <libraryPathEntry kind="1" linkType="1" path="libs"/>
-      <libraryPathEntry kind="3" linkType="1" path="D:/手游框架svn/client/trunk/u3/bin/u3.swc" useDefaultLinkType="false"/>
     </libraryPath>
     <sourceAttachmentPath/>
   </compiler>
@@ -24,7 +23,7 @@
   <flashCatalyst validateFlashCatalystCompatibility="false"/>
   <buildTargets>
     <buildTarget buildTargetName="default">
-      <airSettings airCertificatePath="" airTimestamp="true" anePathSet="false" version="1">
+      <airSettings airCertificatePath="" airTimestamp="true" anePathSet="true" version="1">
         <airExcludes/>
         <anePaths/>
       </airSettings>
