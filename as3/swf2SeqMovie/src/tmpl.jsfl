@@ -55,26 +55,46 @@ for (movieName in movies){
         obj.y = movieConfig['y'][i];
     }
 }
-
-//make linkages for movies
+        
+lib.selectNone();
+lib.editItem();       
 var exportitems = getExportItems();
 var i;
-for(i=0;i<exportitems.length;i++)
-{
-    fl.trace(exportitems[i].name);
-    exportitems[i].linkageExportForAS = true;
-    exportitems[i].linkageExportInFirstFrame = true;
-    exportitems[i].linkageBaseClass = "flash.display.MovieClip";
-}  
+if (!placeMovies) {
+    //make linkages for movies
+    
+    for(i=0;i<exportitems.length;i++)
+    {
+        fl.trace(exportitems[i].name);
+        exportitems[i].linkageExportForAS = true;
+        exportitems[i].linkageExportInFirstFrame = true;
+        exportitems[i].linkageBaseClass = "flash.display.MovieClip";
+    }  
+} else {
+    //placeMovies
+    fl.trace("placeMovies");
+    //doc.getTimeline().deleteLayer(0);
+    for(i=0;i<exportitems.length;i++)
+    {
+        fl.trace(exportitems[i].name);
+        var obj_name = exportitems[i].name.replace(/\./g, "_").replace("@export/", "");
+        doc.getTimeline().addNewLayer(obj_name);
+
+        lib.addItemToDocument({x:200, y:200},  exportitems[i].name);
+        var obj = doc.getTimeline().layers[doc.getTimeline().currentLayer].frames[doc.getTimeline().currentFrame].elements[0];
+        obj.name = "MC_" + obj_name;
+        
+    }  
+}
+       
+
   
 //doc.save();    
 fl.saveDocument(doc, current_path + '/' + swfName + ".fla");
-
 doc.exportSWF(current_path + '/' + swfName + ".swf");
 fl.saveDocument(doc, current_path + '/' + swfName + ".fla");
 
 doc.close();      
-  
 
 
 

@@ -191,6 +191,8 @@
 				//myFileStream.writeUTFBytes("\\\\created by www.swfdiy.com\n");
 				myFileStream.writeUTFBytes("var swfName = '" + swfName + "';\n");
 				myFileStream.writeUTFBytes("var pngCount = " + count + ";\n");
+				myFileStream.writeUTFBytes("var placeMovies = " + (this.placeMovies.selected ? "true":"false") + ";\n");
+
 				myFileStream.writeUTFBytes(info + "\n");
 				
 				
@@ -234,7 +236,9 @@
 		<s:CheckBox id="ignoreBlank" x="15" y="16" label="忽略空帧" selected="true"/>
 		<s:TextInput id="txtCares" x="103" y="39" width="317" height="24" text=".*"/>
 		<s:Label x="104" y="19" text="正则过滤"/>
-		<s:CheckBox x="10" y="45" label="剔除重复" id="noDuplicated" selected="true"/>
+		<s:CheckBox x="11" y="45" label="剔除重复" id="noDuplicated" selected="true"/>
+		<s:CheckBox id="placeMovies" x="12" y="78" width="356" label="时间轴放置替换链接类"
+					selected="true"/>
 	</s:Group>
 	
 	<s:Group id="working" x="7" y="112" width="211" height="67">
