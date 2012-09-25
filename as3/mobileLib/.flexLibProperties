@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<flexLibProperties includeAllClasses="true" useMultiPlatformConfig="true" version="3">
+  <includeClasses>
+    <classEntry path="dx.mobileLib.display.movies.DXMovie"/>
+    <classEntry path="dx.mobileLib.framework.FrameManager"/>
+    <classEntry path="dx.mobileLib.framework.DXMobileLib"/>
+    <classEntry path="dx.mobileLib.display.movies.DXMovieAtlas"/>
+  </includeClasses>
+  <includeResources/>
+  <namespaceManifests/>
+</flexLibProperties>
