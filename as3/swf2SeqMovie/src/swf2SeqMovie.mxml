@@ -2,7 +2,7 @@
 <s:WindowedApplication xmlns:fx="http://ns.adobe.com/mxml/2009"
 					   xmlns:s="library://ns.adobe.com/flex/spark"
 					   xmlns:mx="library://ns.adobe.com/flex/mx"
-					   width="441" height="206" creationComplete="onInit()">
+					   width="441" height="266" creationComplete="onInit()">
 	
 	<fx:Script>
 		<![CDATA[
@@ -28,11 +28,7 @@
 				select.enabled = true;
 				working.enabled = false;
 				mcLoading.label = "";
-	
-
 			}
-			
-			
 			
 			protected function onClickSelect(event:MouseEvent):void
 			{
@@ -47,7 +43,7 @@
 			
 			private function onSlectFiles(data:Array, files:Array):void {	
 				for (var i:int=0;i<data.length;i++){
-					jobs.push(new ParseJob(data[i], files[i],   this.ignoreBlank.selected, txtCares.text));
+					jobs.push(new ParseJob(data[i], files[i],  this.ignoreBlank.selected, txtCares.text));
 				}
 				jobCount = jobs.length;
 				
@@ -177,12 +173,13 @@
 				trace(str);
 				
 				//保存jsfl
-				saveJSFL(event.name + "/" + "create_" + event.name + ".jsfl", str, bitmaps.length );
+				saveJSFL( event.name, str, bitmaps.length );
 			
 				prepareNextJob();
 			}
 			
-			private function saveJSFL(file:String, info:String, count:int):void {
+			private function saveJSFL(swfName:String, info:String, count:int):void {
+				var file:String = swfName + ".jsfl";
 				var myFile:File = File.desktopDirectory.resolvePath("png_output/" + file);
 				var myFileStream:FileStream = new FileStream();
 				myFileStream.open(myFile, FileMode.WRITE);
@@ -192,6 +189,7 @@
 
 				 */
 				//myFileStream.writeUTFBytes("\\\\created by www.swfdiy.com\n");
+				myFileStream.writeUTFBytes("var swfName = '" + swfName + "';\n");
 				myFileStream.writeUTFBytes("var pngCount = " + count + ";\n");
 				myFileStream.writeUTFBytes(info + "\n");
 				
@@ -224,17 +222,7 @@
 				myFileStream.writeBytes(imageByteArray);
 				myFileStream.close();
 			}
-		/*	
-			var pngfile:String ;//= name + "/" + className+ "_" + data.drawRect.width + "X" + data.drawRect.height +".png";
-			
-			
-			for (var b:int=0;b<data.bitmaps.length;b++){
-				pngfile = name + "/" + className +"/" + b + ".png";
-				
-				savePng(data.bitmaps[b], pngfile);
-				
-			}*/
-			
+	
 			
 		]]>
 	</fx:Script>

@@ -23,7 +23,6 @@ package
 	
 	import flashx.textLayout.events.DamageEvent;
 	
-
 	import model.FrameData;
 	import model.MovieData;
 	
@@ -39,7 +38,6 @@ package
 		private var ignoreBlank:Boolean;
 		private var regCares:RegExp;
 		public var name:String;
-		public var mergeDuplicated:Boolean = true;
 		public function ParseJob(pba:ByteArray, pfile:String,  pignoreBlank:Boolean, pCares:String)
 		{
 			ba = pba;
@@ -59,18 +57,19 @@ package
 		
 		protected function onOK(event:Event):void
 		{
-			//分析
+			//分析SWF里有什么链接类
 			var symbols:Vector.<String> = context.applicationDomain.getQualifiedDefinitionNames();
 
 			var movieDataList:Array = [];
 			var classNames:Array = [];
 			for each (var className:String in symbols) {
+				//过滤不要的链接类
 				className = className.replace("::", ".");
 				if(!className.match(regCares) || className.match(regCares).length == 0){
 					continue;
 				}
 				var cl:Class = context.applicationDomain.getDefinition(className) as Class;
-				var d:MovieClip = new cl();
+				var d:MovieClip = new cl() as MovieClip;
 				if (d){
 					var sp:MovieClip = new MovieClip;	
 					sp.addChild(d);
@@ -87,7 +86,7 @@ package
 				}
 			}
 			
-			//save origins to xml
+			//完成
 			var e:MergeEvent = new MergeEvent(MergeEvent.MERGE);
 			e.name = this.name;
 			e.movieDataList = movieDataList;
@@ -113,7 +112,8 @@ package
 			var totalFrames:int = mc.totalFrames;
 			var data:MovieData = new MovieData();
 			for (i=0;i<totalFrames;i++){
-				mc.gotoAndStop(i+1);
+				
+				//mc.gotoAndStop(i+1);
 				
 				var label:String = mc.currentFrameLabel;
 				if (label && !data.frameLables[i]){
@@ -146,29 +146,30 @@ package
 					
 				}
 				
+				nextFrame(mc);
 				
-				//sub movieclips
-				if (mc is DisplayObjectContainer) {
-					//同时支持子影片循环播放
-					var container:DisplayObjectContainer = mc as DisplayObjectContainer;
-					for(var j:int=0;j < container.numChildren;j++) {
-						var ch:DisplayObject = container.getChildAt(j);
-						if (ch is MovieClip && MovieClip(ch).totalFrames > 1) {
-							var chFrames:int = MovieClip(ch).totalFrames;
-							if (MovieClip(ch).currentFrame >= chFrames) {
-								MovieClip(ch).gotoAndStop(1);
-							} else {
-								MovieClip(ch).gotoAndStop(MovieClip(ch).currentFrame+1);
-							}
-						}
-					}
-				}
 				
 			}
 			
 			return data;
 		}		
 	
-		
+		private function nextFrame(mc:MovieClip):void {
+			if (mc.currentFrame < mc.totalFrames){
+				mc.gotoAndStop(mc.currentFrame+1);
+			} else {
+				mc.gotoAndStop(1);
+			}
+			
+			//sub movieclips
+			//同时支持子影片循环播放
+			for(var j:int=0;j < mc.numChildren;j++) {
+				var ch:DisplayObject = mc.getChildAt(j);
+				if (ch is MovieClip && MovieClip(ch).totalFrames > 1) {
+					nextFrame(ch as MovieClip);
+				}
+			}
+			
+		}
 	}
 }

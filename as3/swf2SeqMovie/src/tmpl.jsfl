@@ -7,6 +7,7 @@ var fileReg = /(\d+).png/i;
 var pathReg = /(.*)\/[^/]*/;
 var restult = fl.scriptURI.match(pathReg);
 var current_path = restult[1];
+var png_path = current_path + "/" + swfName;
 
 fl.trace(current_path);
 fl.createDocument();
@@ -16,7 +17,7 @@ lib.newFolder("@export");
 
 //import image to library
 for ( c=0;c<pngCount;c++){
-     doc.importFile(current_path + "/" + c + ".png", true);
+     doc.importFile(png_path + "/" + c + ".png", true);
 }
    
 //make class linkages
@@ -66,8 +67,17 @@ for(i=0;i<exportitems.length;i++)
     exportitems[i].linkageBaseClass = "flash.display.MovieClip";
 }  
   
-doc.save();    
-         
+//doc.save();    
+fl.saveDocument(doc, current_path + '/' + swfName + ".fla");
+
+doc.exportSWF(current_path + '/' + swfName + ".swf");
+fl.saveDocument(doc, current_path + '/' + swfName + ".fla");
+
+doc.close();      
+  
+
+
+
 function getOuterItems() {
     var items = lib.items;
     var outeritems = [];
