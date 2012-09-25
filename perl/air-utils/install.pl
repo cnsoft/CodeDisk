@@ -29,26 +29,6 @@ sub read_config {
 }
 
 
-
-my $cmd =  $rh_config->{adt} . " -package " . " -target " . $rh_config->{target}. ' -provisioning-profile ' . $rh_config->{'provisioning-profile'}. ' -storetype pkcs12 ' . ' -keystore ' . $rh_config->{p12} . ' -storepass ' . $rh_config->{password} . ' ' . $rh_config->{ipa} . ' ' . $rh_config->{files};
-
-print $cmd ."\n";
-
-
-
-
-system("del " . $rh_config->{ipa});
-if ($rh_config->{path}){
-    my $path = $rh_config->{path};
-    $rh_config->{path} =~ s{\"}{}gis;
-    chdir($rh_config->{path});
-} else {
-    
-}
-
-system($cmd);
-
-if ($rh_config->{autoinstall}){
     my $device_cmd = $rh_config->{idb}. ' -devices';
     my $devices_str =`$device_cmd`;
     my $handler = 3;
@@ -57,13 +37,13 @@ if ($rh_config->{autoinstall}){
         print "handler:" . $handler . "\n";
     }
 
-    my $uninstall_cmd =  $rh_config->{install_adt} .' -uninstallApp -platform ios -appid ' .$rh_config->{app_id} .' -device ' .$handler ; 
-    my $install_cmd = $rh_config->{install_adt} .' -installApp -platform ios -package ' .$rh_config->{ipa} .' -device ' .$handler ;  
+    my $uninstall_cmd = $rh_config->{install_adt} .' -uninstallApp -platform ios -appid ' .$rh_config->{app_id} .' -device ' .$handler ; 
+    my $install_cmd =  $rh_config->{install_adt} .' -installApp -platform ios -package ' .$rh_config->{ipa} .' -device ' .$handler ;  
     print $uninstall_cmd ."\n";
     system($uninstall_cmd);
     print $install_cmd ."\n";
     system($install_cmd);
-}
+
 
 __END__
 "C:\Program Files\Adobe\Adobe Flash Builder 4.6\sdks\4.6.0\bin\adt"  -package -target ipa-test-interpreter -provisioning-profile luodx.mobileprovision -storetype pkcs12 -keystore luodx.p12 -storepass 1234 Main.ipa testmobileane4-app.xml testmobileane4.swf -extdir ext
